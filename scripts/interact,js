@@ -1,0 +1,25 @@
+async function main() {
+    const [owner, addr1] = await ethers.getSigners();
+
+    const MyToken = await ethers.getContractFactory("MyToken");
+    const myToken = await MyToken.attach("YOUR_DEPLOYED_CONTRACT_ADDRESS");
+
+    // Minting tokens
+    await myToken.mint(addr1.address, ethers.utils.parseUnits("1000", 18));
+    console.log("Minted 1000 tokens to", addr1.address);
+
+    // Transferring tokens
+    await myToken.connect(addr1).transfer(owner.address, ethers.utils.parseUnits("100", 18));
+    console.log("Transferred 100 tokens from", addr1.address, "to", owner.address);
+
+    // Burning tokens
+    await myToken.connect(addr1).burn(ethers.utils.parseUnits("50", 18));
+    console.log("Burned 50 tokens from", addr1.address);
+}
+
+main()
+.then(() => process.exit(0))
+.catch(error => {
+    console.error(error);
+    process.exit(1);
+});
