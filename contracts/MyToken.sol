@@ -6,8 +6,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MyToken is ERC20, Ownable {
     // Constructor to set the initial owner of the contract
-    constructor(address initialOwner) ERC20("MyToken", "MTK") {
-        transferOwnership(initialOwner); // Set the initial owner
+    constructor(address initialOwner) ERC20("MyToken", "MTK") Ownable(initialOwner) {
+        // Pass the initial owner address to the Ownable constructor.
     }
     
     // Function to mint new tokens, only callable by the owner
