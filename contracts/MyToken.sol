@@ -28,20 +28,6 @@ contract MyToken is ERC20, Ownable {
         require(success, "Transfer failed");
     }
 
-    // Function to approve another account to spend tokens on behalf of the caller
-    function approveTokens(address spender, uint256 amount) public {
-        // Approve the spender to spend the specified amount
-        bool success = approve(spender, amount);
-        require(success, "Approval failed");
-    }
-
-    // Function to transfer tokens from one account to another on behalf of the owner
-    function transferTokensFrom(address sender, address recipient, uint256 amount) public {
-        // Transfer tokens from the sender's account to the recipient using the allowance mechanism
-        bool success = transferFrom(sender, recipient, amount);
-        require(success, "TransferFrom failed");
-    }
-
     // Internal function to check if the caller is the owner
     function isOwner() internal view returns (bool) {
         return owner() == _msgSender();
